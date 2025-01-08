@@ -104,7 +104,8 @@ export class ComplexFormComponent implements OnInit {
       confirmPassword: this.confirmPasswordCtrl
     },
       {
-        Validators : [confirmEqualValidator('password', 'confirmpassword')]
+        Validators : [confirmEqualValidator('password', 'confirmpassword')],
+        updateOn: 'blur'
       });
   }
 
@@ -121,6 +122,9 @@ export class ComplexFormComponent implements OnInit {
     );
     this.showEmailCtrl$ = this.emailForm.statusChanges.pipe(
       map(status => status ==='INVALID' && this.emailCtrl.value && this.confirmEmailCtrl.value)
+    )
+    this.showPasswordError$ = this.loginInfoForm.statusChanges.pipe(
+      map(status => status ==='INVALID' && this.passwordCtrl.value && this.confirmPasswordCtrl.value && this.loginInfoForm.hasError('confirmEqual'))
     )
   }
 

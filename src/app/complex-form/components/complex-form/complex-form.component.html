@@ -65,6 +65,7 @@
                 <mat-error>Ce champ est requis</mat-error>
             </mat-form-field>
         </div>
+        <small class="error-text" *ngIf="showPasswordError$ | async">Les mots de passe ne correspondent pas</small>
     </mat-card>
     <mat-card-actions *ngIf="mainForm.valid">
         <button mat-flat-button color="primary" 
