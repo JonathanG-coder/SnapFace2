@@ -13,6 +13,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { map, Observable, startWith, tap } from 'rxjs';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { ComplexFormService } from '../../services/complex-form.service';
+import { validValidator } from '../../validators/valid.validator';
+import { confirmEqualValidator } from '../../validators/confirm-equal.validator';
 
 @Component({
   selector: 'app-complex-form',
@@ -53,6 +55,8 @@ export class ComplexFormComponent implements OnInit {
 
   showEmailCtrl$!: Observable<boolean>;
   showPhoneCtrl$!: Observable<boolean>;
+  showEmailError$!: Observable<boolean>;
+  showPasswordError$!: Observable<boolean>;
 
 
 
@@ -87,6 +91,9 @@ export class ComplexFormComponent implements OnInit {
     this.emailForm = this.formBuilder.group({
       email: this.emailCtrl,
       confirm: this.confirmEmailCtrl
+    }, {
+      validaors: [confirmEqualValidator('email', 'confirm')],
+      updateOn: 'blur'
     });
     this.phoneCtrl = this.formBuilder.control('');
     this.passwordCtrl = this.formBuilder.control('', Validators.required);
@@ -95,7 +102,10 @@ export class ComplexFormComponent implements OnInit {
       username: ['', Validators.required],
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl
-    });
+    },
+      {
+        Validators : [confirmEqualValidator('password', 'confirmpassword')]
+      });
   }
 
   private initFormObservables() {
@@ -109,13 +119,16 @@ export class ComplexFormComponent implements OnInit {
       map(preference => preference === 'phone'),
       tap(showPhoneCtrl => this.setPhoneValidators(showPhoneCtrl))
     );
+    this.showEmailCtrl$ = this.emailForm.statusChanges.pipe(
+      map(status => status ==='INVALID' && this.emailCtrl.value && this.confirmEmailCtrl.value)
+    )
   }
 
   private setEmailValidators(showEmailCtrl: boolean) {
     if (showEmailCtrl) {
       this.emailCtrl.addValidators([
         Validators.required,
-        Validators.email
+        Validators.email,
       ]);
       this.confirmEmailCtrl.addValidators([     //Ajout de validator, ici il s'agit d'une adresse E-mail
         Validators.required,
