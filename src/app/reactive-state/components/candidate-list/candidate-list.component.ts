@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CandidatesService } from '../../services/candidates.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-candidate-list',
-  imports: [],
   templateUrl: './candidate-list.component.html',
-  styleUrl: './candidate-list.component.scss'
+  styleUrls: ['./candidate-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CandidateListComponent {
+export class CandidateListComponent implements OnInit {
+
+  loading$!: Observable<boolean>;
+  
+  constructor(private candidatesService: CandidatesService) { }
+
+  ngOnInit(): void {
+    this.loading$ = this.candidatesService.loading$;
+  }
+
 
 }
