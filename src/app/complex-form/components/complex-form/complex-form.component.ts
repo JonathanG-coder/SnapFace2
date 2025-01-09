@@ -74,7 +74,7 @@ export class ComplexFormComponent implements OnInit {
     this.mainForm = this.formBuilder.group({
       personalInfo: this.personalInfoForm,
       contactPreference: this.contactPreferenceCtrl,
-      email: this.emailForm,
+      emailForm: this.emailForm,
       phone: this.phoneCtrl,
       loginInfo: this.loginInfoForm
     });
@@ -92,7 +92,7 @@ export class ComplexFormComponent implements OnInit {
       email: this.emailCtrl,
       confirm: this.confirmEmailCtrl
     }, {
-      validaors: [confirmEqualValidator('email', 'confirm')],
+      validators: [confirmEqualValidator('email', 'confirm')],
       updateOn: 'blur'
     });
     this.phoneCtrl = this.formBuilder.control('');
@@ -104,7 +104,7 @@ export class ComplexFormComponent implements OnInit {
       confirmPassword: this.confirmPasswordCtrl
     },
       {
-        Validators : [confirmEqualValidator('password', 'confirmpassword')],
+        Validators : [confirmEqualValidator('password', 'confirmassword')],
         updateOn: 'blur'
       });
   }
@@ -120,7 +120,7 @@ export class ComplexFormComponent implements OnInit {
       map(preference => preference === 'phone'),
       tap(showPhoneCtrl => this.setPhoneValidators(showPhoneCtrl))
     );
-    this.showEmailCtrl$ = this.emailForm.statusChanges.pipe(
+    this.showEmailError$ = this.emailForm.statusChanges.pipe(
       map(status => status ==='INVALID' && this.emailCtrl.value && this.confirmEmailCtrl.value)
     )
     this.showPasswordError$ = this.loginInfoForm.statusChanges.pipe(
@@ -192,6 +192,4 @@ export class ComplexFormComponent implements OnInit {
       return 'Ce champ contient une erreur';
     }
   }
-
-
 }
