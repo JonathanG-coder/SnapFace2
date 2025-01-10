@@ -26,7 +26,7 @@ export class CandidatesService {
 
     getCandidatesFromServer() {
         this.setLoadingStatus(true);
-        this.http.get<Candidate[]>(`${environment.apiUrl}/candidates`).pipe(
+        this.http.get<Candidate[]>(`${environment.apiUrl}candidates`).pipe(
             delay(1000),
             tap(candidates => {
                 this._candidates$.next(candidates);
