@@ -12,7 +12,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     ReactiveStateRoutingModule,
-    SharedModule
+    SharedModule,
+    
   ],
   providers: [
     CandidatesService

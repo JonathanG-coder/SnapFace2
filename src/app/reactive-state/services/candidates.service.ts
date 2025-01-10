@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, delay, Observable, tap } from 'rxjs';
 import { Candidate } from '../models/candidate.model';
+import { environment } from '../../../environnement/environment';
 
 @Injectable()
 export class CandidatesService {
@@ -20,4 +21,20 @@ export class CandidatesService {
     private setLoadingStatus(loading: boolean) {
         this._loading$.next(loading);
     }
+
+
+
+    getCandidatesFromServer() {
+        this.setLoadingStatus(true);
+        this.http.get<Candidate[]>(`${environment.apiUrl}/candidates`).pipe(
+            delay(1000),
+            tap(candidates => {
+                this._candidates$.next(candidates);
+                this.setLoadingStatus(false);
+            })
+        ).subscribe();
+    }
+
+
+
 }
