@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, delay, Observable, tap } from 'rxjs';
+import { BehaviorSubject, delay, map, Observable, tap } from 'rxjs';
 import { Candidate } from '../models/candidate.model';
 import { environment } from '../../../environnement/environment';
 
@@ -18,6 +18,9 @@ export class CandidatesService {
         return this._candidates$.asObservable();
     }
 
+    private lastCandidatesLoad = 0;
+
+
     private setLoadingStatus(loading: boolean) {
         this._loading$.next(loading);
     }
@@ -25,16 +28,28 @@ export class CandidatesService {
 
 
     getCandidatesFromServer() {
+        if (Date.now() - this.lastCandidatesLoad <= 300000) {
+            return;
+        }
         this.setLoadingStatus(true);
         this.http.get<Candidate[]>(`${environment.apiUrl}candidates`).pipe(
             delay(1000),
             tap(candidates => {
+                this.lastCandidatesLoad = Date.now();
                 this._candidates$.next(candidates);
                 this.setLoadingStatus(false);
             })
         ).subscribe();
     }
 
-
+    getCandidateById(id: number): Observable<Candidate> {
+        if (!this.lastCandidatesLoad) {
+            this.getCandidatesFromServer();
+        }
+        return this.candidates$.pipe(
+            map(candidates => candidates.filter(candidate => candidate.id === id)[0])
+        );
+    }
 
 }
+
