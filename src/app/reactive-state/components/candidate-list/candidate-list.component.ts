@@ -8,6 +8,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { CandidateSearchType } from '../../enums/candidate-search-type.enum';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 
@@ -20,7 +25,11 @@ import { RouterModule } from '@angular/router';
     MatProgressSpinnerModule,
     MatListModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    
   ],
   templateUrl: './candidate-list.component.html',
   styleUrls: ['./candidate-list.component.scss'],
@@ -29,19 +38,42 @@ import { RouterModule } from '@angular/router';
 export class CandidateListComponent implements OnInit {
 
   loading$!: Observable<boolean>;
-candidates$!: Observable<Candidate[]>;
+  candidates$!: Observable<Candidate[]>;
 
-constructor(private candidatesService: CandidatesService) {}
+  searchCtrl!: FormControl;
+  searchTypeCtrl!: FormControl;
+  searchTypeOptions!: {
+    value: CandidateSearchType,
+    label: string
+  }[];
 
-ngOnInit(): void {
-  this.initObservables();
-  this.candidatesService.getCandidatesFromServer();
+  constructor(private candidatesService: CandidatesService,
+    private formBuilder: FormBuilder,
+  ) { }
+
+  ngOnInit(): void {
+    this.initForm();
+    this.initObservables();
+    this.candidatesService.getCandidatesFromServer();
+  }
+
+  private initForm() {
+    this.searchCtrl = this.formBuilder.control('');
+    this.searchTypeCtrl = this.formBuilder.control(CandidateSearchType.LASTNAME);
+    this.searchTypeOptions = [
+        { value: CandidateSearchType.LASTNAME, label: 'Nom' },
+        { value: CandidateSearchType.FIRSTNAME, label: 'Prénom' },
+        { value: CandidateSearchType.COMPANY, label: 'Entreprise' }
+    ];
 }
 
-private initObservables() {
+
+  private initObservables() {
     this.loading$ = this.candidatesService.loading$;
     this.candidates$ = this.candidatesService.candidates$;
-}
+  }
+
+
 
 
 }
