@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CandidatesService } from '../../services/candidates.service';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { Candidate } from '../../models/candidate.model';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -29,7 +29,7 @@ import { MatInputModule } from '@angular/material/input';
     MatSelectModule,
     ReactiveFormsModule,
     MatInputModule,
-    
+
   ],
   templateUrl: './candidate-list.component.html',
   styleUrls: ['./candidate-list.component.scss'],
@@ -61,19 +61,30 @@ export class CandidateListComponent implements OnInit {
     this.searchCtrl = this.formBuilder.control('');
     this.searchTypeCtrl = this.formBuilder.control(CandidateSearchType.LASTNAME);
     this.searchTypeOptions = [
-        { value: CandidateSearchType.LASTNAME, label: 'Nom' },
-        { value: CandidateSearchType.FIRSTNAME, label: 'Prénom' },
-        { value: CandidateSearchType.COMPANY, label: 'Entreprise' }
+      { value: CandidateSearchType.LASTNAME, label: 'Nom' },
+      { value: CandidateSearchType.FIRSTNAME, label: 'Prénom' },
+      { value: CandidateSearchType.COMPANY, label: 'Entreprise' }
     ];
-}
+  }
 
 
   private initObservables() {
     this.loading$ = this.candidatesService.loading$;
-    this.candidates$ = this.candidatesService.candidates$;
+    const search$ = this.searchCtrl.valueChanges.pipe(
+      startWith(this.searchCtrl.value),
+      map(value => value.toLowerCase())
+    );
+    const searchType$: Observable<CandidateSearchType> = this.searchTypeCtrl.valueChanges.pipe(
+      startWith(this.searchTypeCtrl.value)
+    );
+    this.candidates$ = combineLatest([
+      search$,
+      searchType$,
+      this.candidatesService.candidates$
+    ]).pipe(
+      map(([search, searchType, candidates]) => candidates.filter(candidate => candidate[searchType]
+        .toLowerCase()
+        .includes(search as string)))
+    );
   }
-
-
-
-
 }
