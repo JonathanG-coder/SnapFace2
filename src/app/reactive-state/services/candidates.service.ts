@@ -25,8 +25,6 @@ export class CandidatesService {
         this._loading$.next(loading);
     }
 
-
-
     getCandidatesFromServer() {
         if (Date.now() - this.lastCandidatesLoad <= 300000) {
             return;
@@ -51,20 +49,6 @@ export class CandidatesService {
         );
     }
 
-    refuseCandidate(id: number): void {
-        this.setLoadingStatus(true);
-        this.http.delete(`${environment.apiUrl}/candidates/${id}`).pipe(
-            delay(1000),
-            switchMap(() => this.candidates$),
-            take(1),
-            map(candidates => candidates.filter(candidate => candidate.id !== id)),
-            tap(candidates => {
-                this._candidates$.next(candidates);
-                this.setLoadingStatus(false);
-            })
-        ).subscribe();
-    }
-
     hireCandidate(id: number): void {
         this.candidates$.pipe(
             take(1),
@@ -83,5 +67,18 @@ export class CandidatesService {
         ).subscribe();
     }
 
+    refuseCandidate(id: number): void {
+        this.setLoadingStatus(true);
+        this.http.delete(`${environment.apiUrl}/candidates/${id}`).pipe(
+            delay(1000),
+            switchMap(() => this.candidates$),
+            take(1),
+            map(candidates => candidates.filter(candidate => candidate.id !== id)),
+            tap(candidates => {
+                this._candidates$.next(candidates);
+                this.setLoadingStatus(false);
+            })
+        ).subscribe();
+    }
 }
 

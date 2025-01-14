@@ -46,32 +46,28 @@ export class SingleCandidateComponent {
     );
   }
 
-  onGoBack() {
-    this.router.navigateByUrl('/reactive-state/candidates');
-  }
-
-  onRefuse() {
-    this.candidate$.pipe(
-        take(1),
-        tap(candidate => {
-            this.candidatesService.refuseCandidate(candidate.id);
-            this.onGoBack();
-        })
-    ).subscribe();
-}
-  
   onHire() {
     this.candidate$.pipe(
       take(1),
       tap(candidate => {
-          this.candidatesService.hireCandidate(candidate.id);
-          this.onGoBack();
+        this.candidatesService.hireCandidate(candidate.id);
+        this.onGoBack();
       })
-  ).subscribe();
+    ).subscribe();
   }
 
+  onRefuse() {
+    this.candidate$.pipe(
+      take(1),
+      tap(candidate => {
+        this.candidatesService.refuseCandidate(candidate.id);
+        this.onGoBack();
+      })
+    ).subscribe();
+  }
 
-
-
+  onGoBack() {
+    this.router.navigateByUrl('/reactive-state/candidates');
+  }
 
 }
