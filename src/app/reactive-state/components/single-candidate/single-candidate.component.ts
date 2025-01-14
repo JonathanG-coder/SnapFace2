@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, take, tap } from 'rxjs';
 import { Candidate } from '../../models/candidate.model';
 import { CandidatesService } from '../../services/candidates.service';
 import { CommonModule } from '@angular/common';
@@ -51,8 +51,14 @@ export class SingleCandidateComponent {
   }
 
   onRefuse() {
-    throw new Error('Method not implemented.');
-  }
+    this.candidate$.pipe(
+        take(1),
+        tap(candidate => {
+            this.candidatesService.refuseCandidate(candidate.id);
+            this.onGoBack();
+        })
+    ).subscribe();
+}
   
   onHire() {
     throw new Error('Method not implemented.');
