@@ -1,0 +1,85 @@
+mat-card {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px;
+    box-sizing: border-box;
+
+    mat-card-title-group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+
+        mat-card-title {
+            font-size: 1.5rem;
+            flex: 1 1 auto;
+        }
+
+        .form {
+            display: flex;
+            gap: 16px;
+            flex: 1 1 100%;
+            flex-wrap: wrap;
+
+            mat-form-field {
+                flex: 1 1 300px;
+            }
+        }
+    }
+
+    mat-spinner {
+        margin: 16px auto;
+        display: block;
+    }
+
+    mat-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 0;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px; 
+            text-decoration: none;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+            
+            min-height: 150px;
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            img[matListAvatar] {
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                object-fit: cover;
+                flex-shrink: 0;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+                margin: 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex: 1 1 auto;
+            }
+
+            p {
+                margin: 0;
+                font-size: 1rem;
+                color: #666;
+            }
+        }
+    }
+}
