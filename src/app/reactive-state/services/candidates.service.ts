@@ -75,6 +75,7 @@ export class CandidatesService {
                 )
             ),
             tap(updatedCandidates => this._candidates$.next(updatedCandidates)),
+            delay(1000),
             switchMap(updatedCandidates =>
                 this.http.patch(`${environment.apiUrl}/candidates/${id}`,
                     updatedCandidates.find(candidate => candidate.id === id))
