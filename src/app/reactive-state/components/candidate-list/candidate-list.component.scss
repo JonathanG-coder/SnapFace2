@@ -9,12 +9,13 @@ mat-card {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center; /* Centrer horizontalement */
         gap: 16px;
 
         mat-card-title {
             font-size: 1.5rem;
             flex: 1 1 auto;
+            text-align: center;
         }
 
         .form {
