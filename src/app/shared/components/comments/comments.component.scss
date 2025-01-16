@@ -4,11 +4,11 @@ mat-list-item {
     color: black;
     display: flex;
     flex-direction: column;
-    width: 100%; /* Les éléments occupent toute la largeur */
-    padding: 10px 0; /* Espacement interne */
-    background: #f9f9f9; /* Fond léger pour séparer les commentaires */
-    border-radius: 4px; /* Coins arrondis */
-    margin-bottom: 10px; /* Espacement entre les éléments */
+    width: 100%; 
+    padding: 10px 0; 
+    background: #f9f9f9; 
+    border-radius: 4px; 
+    margin-bottom: 10px;
 }
 
 mat-list-item span {
@@ -25,9 +25,9 @@ h2[matSubheader] {
 .comments-row {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Alignement à gauche */
+    justify-content: flex-start;
     width: 100%;
-    gap: 10px; /* Espacement entre le champ de saisie et le bouton */
+    gap: 10px; 
     flex-wrap: nowrap;
     margin-bottom: 15px;
 }
@@ -58,8 +58,8 @@ button[mat-icon-button] {
 /* Responsivité */
 @media screen and (max-width: 768px) {
     .comments-row {
-        flex-direction: column; /* Affichage en colonne */
-        align-items: stretch; /* Les éléments s'étendent sur toute la largeur */
+        flex-direction: column; 
+        align-items: stretch; 
         gap: 10px;
     }
 

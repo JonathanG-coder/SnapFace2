@@ -11,8 +11,8 @@
 mat-card {
     margin-bottom: 20px;
     background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Amélioration visuelle */
-    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
 }
 
 mat-card-title {
@@ -20,7 +20,7 @@ mat-card-title {
 
     span {
         color: rgb(2, 104, 187);
-        font-size: 18px; /* Taille ajustée pour un bon contraste */
+        font-size: 18px; 
     }
 }
 
@@ -53,14 +53,14 @@ mat-card-content {
         display: block;
         max-width: 100%;
         height: auto;
-        border-radius: 6px; /* Coins arrondis pour une meilleure intégration */
+        border-radius: 6px; 
     }
 
     .post-content {
         white-space: normal;
         text-align: justify;
         margin-top: 10px;
-        font-size: 16px; /* Taille standard */
+        font-size: 16px; 
     }
 }
 
@@ -71,7 +71,7 @@ mat-card-actions {
     @media (max-width: 768px) {
         display: flex;
         flex-direction: column;
-        gap: 10px; /* Espacement entre les actions */
+        gap: 10px; 
     }
 }
 
@@ -82,15 +82,15 @@ mat-card-actions {
     }
 
     mat-card-title span {
-        font-size: 16px; /* Réduction de la taille de la police */
+        font-size: 16px; 
     }
 
     mat-card-subtitle span {
-        font-size: 12px; /* Police plus petite pour les sous-titres */
+        font-size: 12px; 
     }
 
     .content-container {
-        flex-direction: column; /* Affiche le contenu en colonne */
+        flex-direction: column;
         align-items: center;
     }
 
