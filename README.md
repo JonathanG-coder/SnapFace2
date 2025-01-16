@@ -29,14 +29,14 @@ Ce projet a été réalisé dans le cadre du cours **"Perfectionnez-vous sur Ang
 ### Page d’accueil
 Une interface intuitive permettant de naviguer dans le mini réseau social, de publier des photos et d’interagir avec des commentaires.  
 
-![Page d'accueil](src/assets/images/Awesome%20Components%20Social%20Media.png)
+![Page d'accueil](https://github.com/JonathanG-coder/AwesomeComponents/blob/dev/src/assets/images/Awesome%20Components%20Social%20Media.png)
 
 ---
 
 ### Formulaire complexe
 Un formulaire avancé pour l’inscription utilisateur avec des fonctionnalités interactives et des validations dynamiques.  
 
-![Formulaire complexe](src/assets/images/Awesome%20Components%20Complex%20Form.png)
+![Formulaire complexe](https://github.com/JonathanG-coder/AwesomeComponents/blob/dev/src/assets/images/Awesome%20Components%20Complex%20Form.png)
 
 ---
 
@@ -44,10 +44,9 @@ Un formulaire avancé pour l’inscription utilisateur avec des fonctionnalités
 Une liste réactive des candidats pour simplifier le processus de recrutement avec un affichage détaillé pour chaque profil.  
 
 **Liste des candidats**  
-![Liste des candidats](src/assets/images/Awesome%20Components%20Reactive%20State.png)
-
+![Liste des candidats](https://github.com/JonathanG-coder/AwesomeComponents/blob/dev/src/assets/images/Awesome%20Components%20Reactive%20State.png).
 **Candidat individuel**  
-![Candidat Individuel](src/assets/images/Awesome%20Components%20Single%20Candidate.png)
+![Candidat Individuel](https://github.com/JonathanG-coder/AwesomeComponents/blob/dev/src/assets/images/Awesome%20Components%20Single%20Candidate.png).
 
 ---
 
