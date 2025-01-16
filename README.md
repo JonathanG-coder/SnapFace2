@@ -45,8 +45,6 @@ Une liste réactive des candidats pour simplifier le processus de recrutement av
 
 **Liste des candidats**  
 ![Liste des candidats](https://github.com/JonathanG-coder/AwesomeComponents/blob/dev/src/assets/images/Awesome%20Components%20Reactive%20State.png).
+
 **Candidat individuel**  
 ![Candidat Individuel](https://github.com/JonathanG-coder/AwesomeComponents/blob/dev/src/assets/images/Awesome%20Components%20Single%20Candidate.png).
-
----
-
